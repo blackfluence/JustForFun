@@ -3,6 +3,7 @@ package test.liuxin.network;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -38,7 +39,7 @@ public class CheckOnline2 {
 	public static void reConnect(){
 		Thread thread = new Thread();
 		Process p = null;
-		System.out.println("正在开始重连...");
+		System.out.println(new Date().toLocaleString()+" 正在开始重连...");
 		
 		while(!checkOnline())
 		{
@@ -47,7 +48,7 @@ public class CheckOnline2 {
 				thread.sleep(500);
 				Runtime rn = Runtime.getRuntime();
 				try {
-					System.out.println("正在重启深澜客户端");
+					System.out.println(new Date().toLocaleString()+" 正在重启深澜客户端");
 					p = rn.exec("\"srun3000.exe\"");
 				} catch (Exception e) {
 					System.out.println("Error exec!");
@@ -63,7 +64,7 @@ public class CheckOnline2 {
 	{
 		Thread thread = new Thread();
 		if(checkOnline())
-			System.out.println("网络连接正常，监听中...");
+			System.out.println(new Date().toLocaleString()+" 网络连接正常，监听中...");
 		try {
 			thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -77,7 +78,7 @@ public class CheckOnline2 {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("网络断开");
+		System.out.println(new Date().toLocaleString()+" 网络断开");
 		reConnect();
 	}
 	public static boolean checkOnline() {
