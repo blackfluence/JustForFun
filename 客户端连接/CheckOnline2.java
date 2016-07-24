@@ -23,9 +23,9 @@ public class CheckOnline2 {
 
 	public static void main(String[] args) {
 		es = Executors.newFixedThreadPool(1);
-		callable = new Callable<String>() {			// Ê¹ÓÃCallable½Ó¿Ú×÷Îª¹¹Ôì²ÎÊı
+		callable = new Callable<String>() {			// ä½¿ç”¨Callableæ¥å£ä½œä¸ºæ„é€ å‚æ•°
 			@Override
-			public String call() throws Exception {// ÕæÕıµÄÈÎÎñÔÚÕâÀïÖ´ĞĞ£¬ÕâÀïµÄ·µ»ØÖµÀàĞÍÎªString£¬¿ÉÒÔÎªÈÎÒâÀàĞÍ
+			public String call() throws Exception {// çœŸæ­£çš„ä»»åŠ¡åœ¨è¿™é‡Œæ‰§è¡Œï¼Œè¿™é‡Œçš„è¿”å›å€¼ç±»å‹ä¸ºStringï¼Œå¯ä»¥ä¸ºä»»æ„ç±»å‹
 				URL url = new URL("http://baidu.com");
 				InputStream in = url.openStream();
 				in.close();
@@ -38,7 +38,7 @@ public class CheckOnline2 {
 	public static void reConnect(){
 		Thread thread = new Thread();
 		Process p = null;
-		System.out.println("ÕıÔÚ¿ªÊ¼ÖØÁ¬...");
+		System.out.println("æ­£åœ¨å¼€å§‹é‡è¿...");
 		
 		while(!checkOnline())
 		{
@@ -47,7 +47,7 @@ public class CheckOnline2 {
 				thread.sleep(500);
 				Runtime rn = Runtime.getRuntime();
 				try {
-					System.out.println("ÕıÔÚÖØÆôÉîÀ½¿Í»§¶Ë");
+					System.out.println("æ­£åœ¨é‡å¯æ·±æ¾œå®¢æˆ·ç«¯");
 					p = rn.exec("\"srun3000.exe\"");
 				} catch (Exception e) {
 					System.out.println("Error exec!");
@@ -63,7 +63,7 @@ public class CheckOnline2 {
 	{
 		Thread thread = new Thread();
 		if(checkOnline())
-			System.out.println("ÍøÂçÁ¬½ÓÕı³££¬¼àÌıÖĞ...");
+			System.out.println("ç½‘ç»œè¿æ¥æ­£å¸¸ï¼Œç›‘å¬ä¸­...");
 		try {
 			thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -77,7 +77,7 @@ public class CheckOnline2 {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("ÍøÂç¶Ï¿ª");
+		System.out.println("ç½‘ç»œæ–­å¼€");
 		reConnect();
 	}
 	public static boolean checkOnline() {
@@ -85,7 +85,7 @@ public class CheckOnline2 {
 			future = es.submit(callable);
 			String value = null;
 			try {
-				future.get(1000, TimeUnit.MILLISECONDS).toString();// È¡µÃ½á¹û£¬Í¬Ê±ÉèÖÃ³¬Ê±Ö´ĞĞÊ±¼äÎª1Ãë¡£
+				future.get(1000, TimeUnit.MILLISECONDS).toString();// å–å¾—ç»“æœï¼ŒåŒæ—¶è®¾ç½®è¶…æ—¶æ‰§è¡Œæ—¶é—´ä¸º1ç§’ã€‚
 				return true;
 			} catch (ExecutionException | TimeoutException e) {
 				return false;
